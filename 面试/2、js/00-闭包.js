@@ -9,7 +9,7 @@ const test = create();
 
 const a = 200;
 
-test(); // 100
+test(); // 输出 100
 
 
 
