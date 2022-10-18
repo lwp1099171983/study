@@ -29,7 +29,9 @@ const testObj = {
         s2: 'sing',
         s3: {
             test: '23333'
-        }
+        },
+        s4: new Date(),
+        s5: function() {}
     }
 }
 

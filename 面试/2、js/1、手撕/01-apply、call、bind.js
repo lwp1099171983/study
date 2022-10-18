@@ -1,5 +1,5 @@
 Function.prototype.myCall = function (self, ...args) {
-    if (!(self instanceof Object)) {
+    if (!(self instanceof Object)) {55555555555555555
         throw Error('type Error');
     }
     const content = self || window;
@@ -18,7 +18,7 @@ Function.prototype.myApply = function (self, arr) {
     delete content.fn;
 }
 
-Function.prototype.myBind = function (self, ...args) {
+Function.myBind = function (self, ...args) {
     if (!(self instanceof Object)) {
         throw Error('type Error');
     }
