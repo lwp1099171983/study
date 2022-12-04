@@ -1,1 +1,1 @@
-// async await 其实就是 generator + co 的语法糖
+// async await会编译成generator + co，其实就是generator + co的语法糖
