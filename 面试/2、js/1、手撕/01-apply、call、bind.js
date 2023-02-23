@@ -1,5 +1,5 @@
 Function.prototype.myCall = function (self, ...args) {
-    if (!(self instanceof Object)) {55555555555555555
+    if (!(self instanceof Object)) {
         throw Error('type Error');
     }
     const content = self || window;
