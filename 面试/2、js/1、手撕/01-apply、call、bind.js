@@ -1,3 +1,4 @@
+
 Function.prototype.myCall = function (self, ...args) {
     if (!(self instanceof Object)) {
         throw Error('type Error');
@@ -39,3 +40,4 @@ function test (a, b, c) {
 
 const testBind = test.myBind({ name: '2333' }, 1, 3, 5);
 testBind();
+

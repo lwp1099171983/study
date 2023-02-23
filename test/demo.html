@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<htm>
+  <header>
+    <style>
+      li {
+        display: inline-block;
+      }
+
+      .clearfix:after {
+        content: "";
+        display: table;
+        height: 0;
+        clear: both;
+      }
+      .clearfix {
+        *zoom: 1;
+      }
+      .theTest {
+        border: 100px solid transparent;
+        width: 0;
+        height: 0;
+        border-radius: 100px;
+        border-top-color: red;
+      }
+    </style>
+  </header>
+  <body>
+    <!-- <div>2333</div>
+    <div style="display: inline-block">test</div> -->
+    <ul>
+      <li>1111111</li>
+      <li>2222222</li>
+      <li>3333333</li>
+    </ul>
+    <!-- <div class="wrap">
+      <h3>li标签空白测试</h3>
+      <ul>
+        <li class="part1"></li>
+        <li class="part2"></li>
+        <li class="part3"></li>
+        <li class="part4"></li>
+      </ul>
+    </div> -->
+
+    <div style="">
+      <div>2333</div>
+      <div class="clearfix">
+        <!-- <div style="overflow: hidden"> -->
+        <div style="float: left; background-color: red">2222</div>
+        <div style="float: left; background-color: black">test</div>
+        <div style="float: left; background-color: blue">1111</div>
+        <div style="background: yellow; height: 30px">333</div>
+        <!-- <div style="clear: both"></div> -->
+      </div>
+      <div>4444</div>
+    </div>
+
+    <div class="theTest"></div>
+
+    <style>
+      .square {
+        width: 10%;
+        height: 10vw;
+        background: tomato;
+      }
+    </style>
+    <div class="square"></div>
+
+    <!-- bfc设置两栏 -->
+    <style>
+      .left {
+        width: 100px;
+        height: 200px;
+        background: red;
+        float: left;
+      }
+      .right {
+        height: 300px;
+        background: blue;
+        overflow: hidden;
+      }
+    </style>
+
+    <div class="left"></div>
+    <div class="right"></div>
+
+    <!--测试margin折叠-->
+    <div style="margin-bottom: 20px">margin1</div>
+    <div style="margin-top: 10px">margin2</div>
+  </body>
+</htm>
