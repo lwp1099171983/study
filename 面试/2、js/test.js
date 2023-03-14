@@ -1,46 +1,44 @@
-const a = [1, 2, 3, 4];
-
-// console.log(a, a.slice(1));
-
-console.log(a, a.splice(1, 0, 'a', 'b'))
-
-
-
-
-// const b = { a: 1, b: 2 };
-// b.length = 2;
-// console.log(Array.from(b), b.length);
-
-// const set = new Set(['foo', 'bar', 'baz', 'foo']); // 去重
-// console.log('set', set, Array.from(set));
-
-
-// const mapper = new Map([['1', 'a'], ['2', 'b']]);
-// console.log(mapper.values(), Array.from(mapper.values()));
-
-// var tmp = 'hello world';
-
-// for (var i = 0; i < tmp.length; i++) {
-//     console.log(tmp[i]);
-// }
-
-// console.log(i); // 11
-
-
-const t = {
-    0:'one',
-    1:'two',
-    length: 2
-};
-
-for (const key in t) {
-    console.log(key);
-    if (Object.hasOwnProperty.call(t, key)) {
-        const element = t[key];
-        
-    }
+async function async1() {
+  console.log("async1 start");
+  await async2();
+  console.log("async1 end");
+  setTimeout(() => {
+    console.log("timer1");
+  }, 0);
 }
-
-for (const iterator of t) {
-    console.log('iterator', iterator);
+async function async2() {
+  setTimeout(() => {
+    console.log("timer2");
+  }, 0);
+  console.log("async2");
 }
+async1();
+setTimeout(() => {
+  console.log("timer3");
+}, 0);
+console.log("start");
+
+/**
+async function async1() {
+  console.log("1");
+  console.log(await async2());
+  console.log("2");
+}
+async function async2() {
+  console.log("3");
+  setTimeout(() => console.log("4"), 0);
+  console.log("5");
+}
+console.log("6");
+setTimeout(function () {
+  console.log("7");
+}, 0);
+async1();
+new Promise(function (resolve) {
+  console.log("8");
+  resolve();
+}).then(function () {
+  console.log("9");
+});
+console.log("10");
+**/

@@ -110,7 +110,7 @@ const config = {
       components: resolve("src/components"),
     },
     // 如果用户引入模块时不带扩展名，就会按照extensions从左到右加上去试着解析
-    extensions: [".ts", "..."], // ...代表默认设置 = ['.js', '.json', '.wasm']
+    extensions: [".ts", "..."], // ...代表设置 = ['.js', '.json', '.wasm']
     //告诉webpack要优先从下面设置的目录查找资源。大大节省时间
     modules: [resolve("src"), "node_modules"],
   },
