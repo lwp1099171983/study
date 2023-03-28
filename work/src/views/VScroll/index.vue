@@ -1,5 +1,12 @@
 <script lang="jsx">
-import { ref, defineComponent, onMounted, nextTick, watchEffect, reactive } from "vue";
+import {
+  ref,
+  defineComponent,
+  onMounted,
+  nextTick,
+  watchEffect,
+  reactive,
+} from "vue";
 import useEventListener from "../VScroll/hooks/useEventListener";
 export default defineComponent({
   name: "vScroll",
@@ -15,9 +22,9 @@ export default defineComponent({
       bufferCount: 6, // 缓冲个数
       currentOffset: 0, // 当前位置
       scrollAllHeight: 0, // 容器的初始高度
-      listHeight: 0, // 列表高度
+      listHeight: 0, // 列表整体高度
       renderCount: 0, // 渲染节点数量
-    })
+    });
     function getData() {
       const arr = [];
       for (let i = 0; i < 5000; i++) {
@@ -26,17 +33,17 @@ export default defineComponent({
       return arr;
     }
     onMounted(() => {
-      const listHeightTemp = itemHeight * scrollList.value.length;
       scrollObj.scrollAllHeight = allRef.value.offsetHeight;
       scrollObj.renderCount =
-        Math.ceil(scrollObj.scrollAllHeight / itemHeight) + scrollObj.bufferCount;
+        Math.ceil(scrollObj.scrollAllHeight / itemHeight) +
+        scrollObj.bufferCount;
       scrollObj.end = scrollObj.renderCount + 1;
       console.log("allRef：", scrollObj.start, scrollObj.end);
-      scrollObj.listHeight = listHeightTemp;
+      scrollObj.listHeight = itemHeight * scrollList.value.length;
       scrollObj.data = scrollList.value.slice(scrollObj.start, scrollObj.end);
-    })
+    });
     watchEffect(() => {
-      console.log('watchEffect', scrollObj.start, scrollObj.end);
+      console.log("watchEffect", scrollObj.start, scrollObj.end);
       scrollObj.data = scrollList.value.slice(scrollObj.start, scrollObj.end);
     });
     // 监听滚动事件
@@ -46,8 +53,10 @@ export default defineComponent({
         // 顶部高度
         const { scrollTop } = allRef.value;
         console.log("scrollTop", scrollTop);
-        scrollObj.start = Math.floor(scrollTop / itemHeight)
-        scrollObj.end = Math.floor(scrollTop / itemHeight + scrollObj.renderCount + 1);
+        scrollObj.start = Math.floor(scrollTop / itemHeight);
+        scrollObj.end = Math.floor(
+          scrollTop / itemHeight + scrollObj.renderCount + 1
+        );
         scrollObj.currentOffset = scrollTop - (scrollTop % itemHeight);
       },
       allRef
