@@ -37,3 +37,4 @@ selenium-debug.log
 #应用安装包
 *.apk
 *.ipa
+uni-app/my-uni-app/yarn.lock
