@@ -29,7 +29,7 @@ async function start() {
   await asyncPool({
     limit: 2,
     items: [
-      () => console("睡觉"),
+      () => sleep("睡觉"),
       () => sleep("吃饭"),
       () => sleep("学习"),
       () => sleep("打游戏"),
