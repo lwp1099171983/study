@@ -24,9 +24,9 @@ const compose = (...fns) => {
   );
 };
 
-const a = compose(fn1, fn2, fn3, fn4);
-console.log(a);
-console.log(a(1)); // 1+4+3+2+1=11
+// const a = compose(fn1, fn2, fn3, fn4);
+// console.log(a);
+// console.log(a(1)); // 1+4+3+2+1=11
 
 /*
 2、题目描述:setinterval（带清除器） 用来实现循环定时调用 可能会存在一定的问题 能用 settimeout 解决吗
@@ -186,7 +186,137 @@ function myNew (constructorFn, ...args) {
 /**
  * 9 call apply bind
  */
-
-function myCall () {
-  
+Function.prototype.myCall = function(self, ...args) {
+  const content = self || window;
+  content.fn = this;
+  content.fn(...args);
+  delete content.fn;
 }
+Function.prototype.maApply = function(self, args) {
+  const content = self || window;
+  content.fn = this;
+  content.fn(args);
+  delete content.fn;
+}
+Function.prototype.bind = function(self, ...args) {
+  const fn = this;
+  return function () {
+    this.myCall(self, ...args);
+  }
+}
+
+/**
+ * 
+ * 10 深拷贝（考虑到复制 Symbol 类型）
+ * 
+ */
+const isObject = (obj) => {
+  return typeof obj === 'object' && obj !== null;
+}
+const deepClone = (obj) => {
+  if (!isObject(obj)) return null;
+  let result;
+  if (Array.isArray(obj)) {
+    result = [];
+  } else {
+    result = {};
+  }
+  Reflect.ownKeys(obj).forEach(key => {
+    const element = obj[key];
+    if (isObject(element)) {
+      result[key] = deepClone(element)
+    } else {
+      result[key] = element;
+    }
+  })
+  return result;
+}
+
+// const test = {
+//   a: {
+//     b: {
+//       c: {
+//         d: 23333
+//       }
+//     },
+//     e: {
+//       f: 66666
+//     }
+//   }
+// }
+
+// console.dir(deepClone(test))
+
+
+/**
+ * 
+ * 11 instanceof
+ * 
+ */
+
+function myInstanceof (property, constructor) {
+  // console.log(property);
+  let result;
+  if (property === null) {
+    result = false
+  }
+  if (property.__proto__ === constructor.prototype) {
+    result = true
+  } else {
+    result = myInstanceof(property.__proto__, constructor);
+  }
+  return result
+}
+
+const test = new Array();
+
+console.log(myInstanceof(test, Object))
+
+/**
+ * 
+ * 12 柯里化
+ * 
+ */
+
+/**
+ * 
+ * 13 冒泡排序--时间复杂度 n^2
+ * 
+ */
+
+/**
+ * 
+ * 14 选择排序--时间复杂度 n^2
+ * 
+ */
+
+/**
+ * 
+ * 15 插入排序--时间复杂度 n^2
+ * 
+ */
+
+/**
+ * 
+ * 16 快排--时间复杂度 nlogn~ n^2 之间
+ * 
+ */
+
+/**
+ * 
+ * 17 归并排序--时间复杂度 nlog(n)
+ * 
+ */
+
+/**
+ * 
+ * 18 二分查找--时间复杂度 log2(n)
+ * 
+ */
+
+/**
+ * 
+ * 
+ * 19 实现 LazyMan
+ * 
+ */
