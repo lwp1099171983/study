@@ -167,26 +167,32 @@ const asyncPool = async ({ limit = 2, items = [] }) => {
 
 // start();
 
-
 /**
  *
  * 7 new 操作符
  *
  */
 
-function myNew (constructorFn, ...args) {
-
+function myNew(constructorFn, ...args) {
   let newObj = Object.create(constructorFn);
   const result = constructorFn.apply(newObj, ...args);
-  const flag = result && (typeof result === 'object' || typeof result === 'function');
+  const flag =
+    result && (typeof result === "object" || typeof result === "function");
   return flag ? result : newObj;
-
 }
 
 /**
  * 9 call apply bind
  */
 
-function myCall () {
-  
+Function.prototype.myCall = function (self, ...args) {
+  if (!self instanceof Object) throw Error("type Error");
+  const content = self || window;
+  content.fn = this;
+  content.fn(...args);
+  delete content.fn;
+};
+
+function testAdd(...args) {
+  console.log(this);
 }
