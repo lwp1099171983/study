@@ -1,5 +1,11 @@
-import Vue from 'vue'
 import IForm from './i-form'
-import IFormItem from './i-form/src/components/i-formItem'
-
-Vue.use(IForm).use(IFormItem)
+import IFormItem from './i-form-item'
+import IInput from './i-input'
+console.log('IForm', IForm.name)
+export default {
+  install(app) {
+    app.component('IForm', IForm)
+    app.component('IFormItem', IFormItem)
+    app.component('IInput', IInput)
+  }
+}

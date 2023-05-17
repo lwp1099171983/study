@@ -1,26 +1,15 @@
 <template>
-  <HelloWorld ref="hello" msg="Welcome to Your Vue.js App" />
+  <formDemo />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import { ref, onMounted } from 'vue'
+import formDemo from './demo/form-demo.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    formDemo
   },
-  setup() {
-    const hello = ref(null)
-
-    onMounted(() => {
-      console.log('hello', hello.value)
-    })
-
-    return {
-      hello
-    }
-  }
+  setup() {}
 }
 </script>
 
