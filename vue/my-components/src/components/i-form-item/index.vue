@@ -114,7 +114,6 @@ export default {
     onMounted(() => {
       // 设置初始值，以便在重置时恢复默认值
       initialValue.value = fieldValue
-
       if (props.prop) {
         // 添加当前实例到i-form组件
         formContext.onFormMountedAdd(

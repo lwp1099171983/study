@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { reactive, provide, watchEffect } from 'vue'
+import { reactive, provide } from 'vue'
 import { formContextKey } from './constance'
 export default {
   name: 'IForm',
@@ -54,10 +54,6 @@ export default {
         })
       })
     }
-
-    watchEffect(() => {
-      console.log('props', props)
-    })
 
     provide(
       formContextKey,

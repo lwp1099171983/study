@@ -14,15 +14,7 @@
 </template>
 <script>
 import { reactive, ref, watchEffect } from 'vue'
-// import IForm from '../components/i-form'
-// import IFormItem from '../components/i-form-item'
-// import IInput from '../components/i-input'
 export default {
-  // components: {
-  //   IForm,
-  //   IFormItem,
-  //   IInput
-  // },
   setup() {
     const form = ref()
 

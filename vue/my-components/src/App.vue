@@ -1,14 +1,10 @@
 <template>
-  <formDemo />
+  <router-view></router-view>
 </template>
 
 <script>
-import formDemo from './demo/form-demo.vue'
 export default {
   name: 'App',
-  components: {
-    formDemo
-  },
   setup() {}
 }
 </script>
