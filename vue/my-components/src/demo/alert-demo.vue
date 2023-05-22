@@ -1,9 +1,14 @@
 <template>
-  <div></div>
+  <button @click="notice">2333</button>
 </template>
 
 <script setup>
-import '../components/i-alert/notification'
+import alert from '../components/i-alert'
+const notice = () =>
+  alert.info({
+    content: 'test',
+    duration: 2
+  })
 </script>
 
 <style lang="scss" scoped></style>

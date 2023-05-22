@@ -21,18 +21,18 @@ const add = notice => {
     },
     notice
   )
-  this.notices.push(_notice)
+  notices.push(_notice)
   // 定时移除，单位：秒
   const duration = notice.duration
   setTimeout(() => {
-    this.remove(name)
+    remove(name)
   }, duration * 1000)
 }
 
 const remove = name => {
-  for (let i = 0; i < notices.value.length; i++) {
-    if (notices.value[i].name === name) {
-      notices.value.splice(i, 1)
+  for (let i = 0; i < notices.length; i++) {
+    if (notices[i].name === name) {
+      notices.splice(i, 1)
       break
     }
   }
