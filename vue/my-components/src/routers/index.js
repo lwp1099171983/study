@@ -10,6 +10,11 @@ const routes = [
     path: '/alert-demo',
     name: '/alert-demo',
     component: () => import('@/demo/alert-demo.vue')
+  },
+  {
+    path: '/checkbox-demo',
+    name: '/checkbox-demo',
+    component: () => import('@/demo/checkbox-demo.vue')
   }
 ]
 

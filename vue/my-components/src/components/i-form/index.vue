@@ -22,8 +22,8 @@ export default {
     }
 
     // 删除form-item
-    const onFormMountedRemove = field => {
-      if (field.prop) fields.splice(fields, 1)
+    const onFormMountedRemove = prop => {
+      if (prop) fields.splice(fields.map(e => e.prop).indexOf(prop), 1)
     }
 
     // 公开方法：全部重置数据

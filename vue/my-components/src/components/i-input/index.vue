@@ -32,7 +32,7 @@ const handleInput = event => {
   const inputVal = event.target.value
   currentValue.value = inputVal
   emits('update:modelValue', inputVal)
-  formItemContext.onFormChange(inputVal)
+  formItemContext?.onFormChange && formItemContext.onFormChange(inputVal)
 }
 
 const handleBlur = () => {

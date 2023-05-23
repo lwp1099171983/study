@@ -20,7 +20,8 @@ import {
   toRefs,
   provide,
   ref,
-  computed
+  computed,
+  onBeforeUnmount
 } from 'vue'
 import { formContextKey, formItemContextKey } from '../i-form/constance'
 import AsyncValidator from 'async-validator'
@@ -125,6 +126,13 @@ export default {
             resetField
           })
         )
+      }
+    })
+
+    onBeforeUnmount(() => {
+      if (props.prop) {
+        // 添加当前实例到i-form组件
+        formContext.onFormMountedRemove(props.prop)
       }
     })
 
