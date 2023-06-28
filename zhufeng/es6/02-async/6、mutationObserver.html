@@ -7,27 +7,17 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="some-id"></div>
+    <div id="app"></div>
     <script>
-      // 选择需要观察变动的节点
-      const targetNode = document.getElementById("some-id");
+      const targetNode = document.getElementById("app");
 
       // 观察器的配置（需要观察什么变动）
       const config = { attributes: true, childList: true, subtree: true };
 
       // 当观察到变动时执行的回调函数
       const callback = function (mutationsList, observer) {
-        // // Use traditional 'for loops' for IE 11
-        // for (let mutation of mutationsList) {
-        //   if (mutation.type === "childList") {
-        //     console.log("A child node has been added or removed.");
-        //   } else if (mutation.type === "attributes") {
-        //     console.log(
-        //       "The " + mutation.attributeName + " attribute was modified."
-        //     );
-        //   }
-        // }
-        console.log("callback");
+        // Use traditional 'for loops' for IE 11
+        console.log('callback')
       };
 
       // 创建一个观察器实例并传入回调函数
@@ -37,7 +27,9 @@
       observer.observe(targetNode, config);
 
       // 之后，可停止观察
-      observer.disconnect();
+
+      targetNode.appendChild(document.createElement('p'));
+      console.log('ok')
     </script>
   </body>
 </html>

@@ -5,6 +5,6 @@ module.exports = "6666";
 
 // process对象
 // platform：平台     cwd/chdir     env
-// console.log(process.env);
+console.log(process.env);
 
 console.log(process.argv);

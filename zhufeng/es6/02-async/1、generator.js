@@ -3,10 +3,10 @@
 // “元编程”————改变js本身的功能: [Symbol.xxxx]
 let obj = {
   get [Symbol.toStringTag]() {
-    return '2333'
-  }
-}
-console.log(Object.prototype.toString.call(obj))
+    return "2333";
+  },
+};
+console.log(Object.prototype.toString.call(obj));
 
 // 例子： 类数组 转成 数组
 const likeArray = {
@@ -29,13 +29,13 @@ const likeArray = {
   //   }
   // }
   [Symbol.iterator]: function* () {
-    let i = 0
-    let len = this.length
+    let i = 0;
+    let len = this.length;
     while (len !== i) {
-      yield this[i++]
+      yield this[i++];
     }
-  }
-}
+  },
+};
 
-let arr = [...likeArray]
-console.log(arr)
+let arr = [...likeArray];
+console.log(arr);

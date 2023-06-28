@@ -4,35 +4,35 @@ const fs = require("fs");
 const path = require("path");
 const ReadStream = require("./readStream");
 
-// const rs = fs.createReadStream(path.resolve(__dirname, "1.txt"), {
-const rs = new ReadStream(path.resolve(__dirname, "1.txt"), {
+const rs = fs.createReadStream(path.resolve(__dirname, "1.txt"), {
+  // const rs = new ReadStream(path.resolve(__dirname, "1.txt"), {
   // flags: "r",
   highWaterMark: 3,
   // start: 1,
   // end: 5,
 });
 
-// rs.on("open", (fd) => {
-//   console.log("open", fd);
-// });
+rs.on("open", (fd) => {
+  console.log("open", fd);
+});
 
-// let arr = [];
-// rs.on("data", (chunk) => {
-//   arr.push(chunk);
-//   console.log("data", chunk);
-// });
+let arr = [];
+rs.on("data", (chunk) => {
+  arr.push(chunk);
+  console.log("data", chunk);
+});
 
-// rs.on("end", () => {
-//   console.log("end", Buffer.concat(arr).toString());
-// });
+rs.on("end", () => {
+  console.log("end", Buffer.concat(arr).toString());
+});
 
-// rs.on("error", () => {
-//   console.log("error");
-// });
+rs.on("error", () => {
+  console.log("error");
+});
 
-// rs.on("close", () => {
-//   console.log("error");
-// });
+rs.on("close", () => {
+  console.log("error");
+});
 
 // 1.内部就是创建了一个可读流 ：  new ReadStream
 // 2. 内部会对用户的属性 进行格式化

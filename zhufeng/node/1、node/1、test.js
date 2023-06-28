@@ -10,14 +10,14 @@ const fs = require("fs");
 // let content = fs.readFileSync('./note1.md','utf8');// 同步阻塞， 适合读取小文件 模块化我们可以采用readFileSync来读取文件
 
 let exisits = fs.existsSync("./note.md"); // 此方法只用同步方法，异步方法不符合规范，所以不采用
-console.log(exisits);
+// console.log("exisits", exisits);
 
 // 对文件的操作 一般不采用相对路径 ， 相对路径不明确
 const path = require("path");
 
 // __dirname 代表的是当前文件所在的目录 是一个绝对路径，而且不可变
-console.log(path.join(__dirname, "a", "b", "c", "d", ".", "/", "..")); // 会根据系统的分割符 将对应的路径拼接在一起
-console.log(path.resolve(__dirname, "a", "b", "/")); // 根据执行的路径 解析出一个绝对路径, 默认是可以变的 （根据执行的路径来发生变化）
+console.log(1, path.join(__dirname, "a", "b", "c", "d", ".", "/", "..")); // 会根据系统的分割符 将对应的路径拼接在一起
+console.log(2, path.resolve(__dirname, "a", "b", "/")); // 根据执行的路径 解析出一个绝对路径, 默认是可以变的 （根据执行的路径来发生变化）
 
 // path.resolve 和 path.join 可以互相转化，但是resovlve不能遇到/ 会回到根路径 , 如果只是拼接则采用join
 
