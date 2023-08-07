@@ -18,6 +18,10 @@ setTimeout(() => {
 }, 0);
 console.log("start");
 
+function testFn() {
+  console.log("这是一个方法");
+}
+
 /**
 async function async1() {
   console.log("1");
