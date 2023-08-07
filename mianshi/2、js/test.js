@@ -19,7 +19,7 @@ setTimeout(() => {
 console.log("start");
 
 function testFn() {
-  console.log("这是一个方法2333");
+  console.log("2333");
 }
 
 /**
