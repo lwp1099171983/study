@@ -1,4 +1,11 @@
-import { Controller, Post, Body, Inject, Res } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Inject,
+  Res,
+  ValidationPipe,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
 import { RegisterDto } from './dto/register.dto';
@@ -14,7 +21,7 @@ export class UserController {
 
   @Post('login')
   async login(
-    @Body() user: UserDto,
+    @Body(ValidationPipe) user: UserDto,
     @Res({ passthrough: true }) res: Response,
   ) {
     const foundUser = await this.userService.login(user);
@@ -33,7 +40,7 @@ export class UserController {
   }
 
   @Post('register')
-  async register(@Body() user: RegisterDto) {
+  async register(@Body(ValidationPipe) user: RegisterDto) {
     return await this.userService.register(user);
   }
 }
