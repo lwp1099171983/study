@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Inject,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -21,17 +22,65 @@ export class UserController {
   @Inject(JwtService)
   private jwtService: JwtService;
 
+  @Get('refresh')
+  async refresh(@Param('refresh_token') refreshToken: string) {
+    try {
+      const data = this.jwtService.verify(refreshToken);
+
+      const user = await this.userService.foundUserById(data.user.userId);
+
+      // 重新生成token
+      const access_token = this.jwtService.sign(
+        {
+          user: {
+            userId: user.id,
+            username: user.username,
+            roles: user.roles,
+          },
+        },
+        {
+          expiresIn: '30m',
+        },
+      );
+      const refresh_token = this.jwtService.sign(
+        {
+          userId: user.id,
+        },
+        {
+          expiresIn: '7d',
+        },
+      );
+
+      return { access_token, refresh_token };
+    } catch (error) {
+      throw new UnauthorizedException('token已失效，请重新登陆');
+    }
+  }
+
   @Post('login')
   async login(@Body() userLogin: UserLoginDto) {
     const user = await this.userService.login(userLogin);
-    const token = this.jwtService.sign({
-      user: {
-        username: user.username,
-        roles: user.roles,
+    const access_token = this.jwtService.sign(
+      {
+        user: {
+          userId: user.id,
+          username: user.username,
+          roles: user.roles,
+        },
       },
-    });
-
-    return { token };
+      {
+        expiresIn: '30m',
+      },
+    );
+    const refresh_token = this.jwtService.sign(
+      {
+        userId: user.id,
+      },
+      {
+        expiresIn: '7d',
+      },
+    );
+    return { access_token, refresh_token };
   }
 
   @Get('init')

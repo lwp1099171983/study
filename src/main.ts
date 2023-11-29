@@ -7,6 +7,9 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
+  // 处理跨域
+  app.enableCors();
+
   await app.listen(3000);
 }
 bootstrap();

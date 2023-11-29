@@ -13,6 +13,18 @@ export class UserService {
   @InjectEntityManager()
   entityManager: EntityManager;
 
+  async foundUserById(userId: number) {
+    const user = await this.entityManager.findOne(User, {
+      where: {
+        id: userId,
+      },
+      relations: {
+        roles: true,
+      },
+    });
+    return user;
+  }
+
   async foundPermissionByIds(roleIds: number[]) {
     const roles = await this.entityManager.find(Role, {
       where: {
