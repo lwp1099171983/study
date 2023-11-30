@@ -1,11 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Inject,
+} from '@nestjs/common';
 import { AaaService } from './aaa.service';
 import { CreateAaaDto } from './dto/create-aaa.dto';
 import { UpdateAaaDto } from './dto/update-aaa.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('aaa')
 export class AaaController {
   constructor(private readonly aaaService: AaaService) {}
+
+  @Inject(ConfigService)
+  private configService: ConfigService;
 
   @Post()
   create(@Body() createAaaDto: CreateAaaDto) {
@@ -14,7 +27,10 @@ export class AaaController {
 
   @Get()
   findAll() {
-    return this.aaaService.findAll();
+    return {
+      aaa: this.configService.get('aaa'),
+      bbb: this.configService.get('bbb'),
+    };
   }
 
   @Get(':id')
