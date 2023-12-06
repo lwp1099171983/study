@@ -1,4 +1,4 @@
-import { Global, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -6,13 +6,14 @@ import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
 import { Role } from './user/entities/role.entity';
 import { Permission } from './user/entities/permission.entity';
-import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { AaaModule } from './aaa/aaa.module';
 import { BbbModule } from './bbb/bbb.module';
 import { LoginGuard } from './login.guard';
 import { APP_GUARD } from '@nestjs/core/constants';
 import { PermissionGuard } from './permission.guard';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { RedisModule } from './redis/redis.module';
 // import * as path from 'path';
 import config from './config';
 @Module({
@@ -26,14 +27,13 @@ import config from './config';
       isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
-      // imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
-        const host = await configService.get('application.db.host');
-        const port = await configService.get('application.db.port');
-        const type = await configService.get('application.db.type');
-        const username = await configService.get('application.db.username');
-        const password = await configService.get('application.db.password');
-        const database = await configService.get('application.db.database');
+        const host = configService.get('application.db.host');
+        const port = configService.get('application.db.port');
+        const type = configService.get('application.db.type');
+        const username = configService.get('application.db.username');
+        const password = configService.get('application.db.password');
+        const database = configService.get('application.db.database');
         const dbConfig = {
           host,
           port,
@@ -71,6 +71,7 @@ import config from './config';
     UserModule,
     AaaModule,
     BbbModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [

@@ -7,43 +7,51 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user/user.service';
 import { Reflector } from '@nestjs/core';
+import { RedisService } from './redis/redis.service';
+import { Role } from './user/entities/role.entity';
 
 @Injectable()
 export class PermissionGuard implements CanActivate {
   @Inject(UserService)
   private userService: UserService;
 
+  @Inject(RedisService)
+  private redisService: RedisService;
+
   @Inject(Reflector)
   private reflector: Reflector;
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    console.log(4333);
-
     const request = context.switchToHttp().getRequest();
     const user = request.user;
 
-    console.log('request.user', request.user);
-
     if (!user) return true;
 
-    // 查询roles
-    const roles = await this.userService.foundPermissionByIds(
-      user.roles.map((e) => e.id),
+    let roles: Role[] = await this.redisService.get(
+      `user_${user.username}_roles`,
     );
+
+    if (!roles?.length) {
+      // 查询roles
+      roles = await this.userService.foundPermissionByIds(
+        user.roles.map((e) => e.id),
+      );
+      await this.redisService.set(
+        `user_${user.username}_roles`,
+        roles,
+        60 * 30,
+      );
+    }
 
     const permissions = roles.reduce((total, current) => {
       total.push(...current.permissions);
       return total;
     }, []);
 
-    console.log('permissions', permissions);
-
     const requirePermissions = this.reflector.getAllAndOverride(
       'require-permission',
       [context.getClass(), context.getHandler()],
     );
-
-    console.log('requirePermissions', requirePermissions);
 
     for (let index = 0; index < requirePermissions.length; index++) {
       const requirePermission = requirePermissions[index];
