@@ -12,6 +12,7 @@ import { createClient } from 'redis';
       useFactory: async (configService: ConfigService) => {
         const host = await configService.get<string>('application.redis.host');
         const port = await configService.get<number>('application.redis.port');
+
         const client = createClient({
           socket: {
             host,

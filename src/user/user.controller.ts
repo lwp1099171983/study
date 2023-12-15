@@ -8,12 +8,14 @@ import {
   Delete,
   Inject,
   UnauthorizedException,
+  HttpStatus,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserLoginDto } from './dto/user-login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 
 @Controller('user')
 export class UserController {
@@ -57,6 +59,29 @@ export class UserController {
     }
   }
 
+  @ApiOperation({
+    summary: '用户登录',
+    description: '用户登录',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: '登录成功返回',
+    type: Object,
+  })
+  @ApiParam({
+    name: 'username',
+    description: '用户名',
+    required: true,
+    type: String,
+    example: 'admin',
+  })
+  @ApiParam({
+    name: 'password',
+    description: '密码',
+    required: true,
+    type: String,
+    example: '2333',
+  })
   @Post('login')
   async login(@Body() userLogin: UserLoginDto) {
     const user = await this.userService.login(userLogin);
