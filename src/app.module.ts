@@ -14,6 +14,7 @@ import { APP_GUARD } from '@nestjs/core/constants';
 import { PermissionGuard } from './permission.guard';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RedisModule } from './redis/redis.module';
+import { EmailModule } from './email/email.module';
 // import * as path from 'path';
 import config from './config';
 @Module({
@@ -72,6 +73,7 @@ import config from './config';
     AaaModule,
     BbbModule,
     RedisModule,
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [

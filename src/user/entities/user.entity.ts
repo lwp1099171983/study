@@ -24,6 +24,11 @@ export class User {
   })
   password: string;
 
+  @Column({
+    length: 50,
+  })
+  emial: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

@@ -10,7 +10,7 @@ export class RedisService {
     return await this.redisClient.get(key);
   }
 
-  async set(key: string, value: Record<string, any>, ttl?: number) {
+  async set(key: string, value: any, ttl?: number) {
     await this.redisClient.set(key, JSON.stringify(value));
     if (ttl) {
       await this.redisClient.expire(key, ttl);
