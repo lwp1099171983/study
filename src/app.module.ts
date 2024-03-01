@@ -15,10 +15,15 @@ import { PermissionGuard } from './permission.guard';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RedisModule } from './redis/redis.module';
 import { EmailModule } from './email/email.module';
+import { UniqueCodeModule } from './unique-code/unique-code.module';
 // import * as path from 'path';
 import config from './config';
+import { UniqueCode } from './unique-code/entities/uniqueCode.entity';
+import { ScheduleModule } from '@nestjs/schedule';
+import { ShortLongMap } from './unique-code/entities/ShortLongMap.entity';
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       // envFilePath: [
       //   path.join(process.cwd(), 'test.env'),
@@ -42,7 +47,7 @@ import config from './config';
           username,
           password,
           database,
-          entities: [User, Role, Permission],
+          entities: [User, Role, Permission, UniqueCode, ShortLongMap],
           synchronize: true,
           logging: true,
           poolSize: 10,
@@ -74,6 +79,7 @@ import config from './config';
     BbbModule,
     RedisModule,
     EmailModule,
+    UniqueCodeModule,
   ],
   controllers: [AppController],
   providers: [
